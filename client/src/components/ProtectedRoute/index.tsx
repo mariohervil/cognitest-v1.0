@@ -6,9 +6,9 @@ interface ProtectedProps {
 	children: React.ReactNode;
 }
 
+// Es una ruta protegida, si no hay una sesión activa, se redirige a la página de error 401
 const ProtectedRoute = ({ children }: ProtectedProps) => {
 	const session = useAuthStore((state) => state.session);
-	const error = useAuthStore((state) => state.error);
 	if (!session) {
 		return <Error401 />;
 	} else return <>{children}</>;
