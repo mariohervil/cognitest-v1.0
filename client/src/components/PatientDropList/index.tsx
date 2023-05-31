@@ -20,13 +20,22 @@ interface PatientDropListProps {
 	setSelectedPatient: (patient: string) => void;
 }
 
+// Este componente es el desplegable de pacientes que se usa en el modal de guardar configuración
+/**
+ *
+ * @param props pacientes, selectedPatient, setSelectedPatient
+ * setSelectedPatient es la función que se ejecuta cuando se selecciona un paciente en el desplegable, actualiza el estado de selectedPatient, que es el paciente seleccionado
+ */
 const PatientDropList = ({
 	patients,
 	setSelectedPatient,
 	selectedPatient,
 }: PatientDropListProps) => {
+	// Booleano que indica si el desplegable está abierto o no
 	const [open, setOpen] = useState(false);
 
+	// El JSX que se muestra, está hecho con una librería de componentes llamada ShadCN, se usa para hacer el desplegable acoplando varios componentes
+	// incluye una barra de búsqueda y una lista de pacientes, si volvemos a clicar en el paciente seleccionado se deselecciona y vuelve al estado inicial
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
@@ -47,7 +56,7 @@ const PatientDropList = ({
 			<PopoverContent className="w-[200px] p-0">
 				<Command>
 					<CommandInput placeholder="Busca un paciente..." />
-					<CommandEmpty>No framework found.</CommandEmpty>
+					<CommandEmpty>No hay pacientes.</CommandEmpty>
 					<CommandGroup>
 						{patients.map((patient) => (
 							<CommandItem

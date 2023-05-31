@@ -3,7 +3,6 @@ import { IGameConfig, gameConfigSchema } from './game-models/gameConfig.model';
 import { IWordGame, wordGameSchema } from './game-models/wordGame.model';
 // User model, used by patients only.
 export interface IPatient extends Document {
-	//? username will be an Email.
 	username: String;
 	password: String;
 	firstName: String;
@@ -21,7 +20,6 @@ export interface IPatient extends Document {
 
 const patientSchema = new Schema(
 	{
-		//! username will be an Email.
 		username: { type: String, unique: true },
 		password: String,
 		firstName: String,

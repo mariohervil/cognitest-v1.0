@@ -1,5 +1,4 @@
 import { OptionWord, TargetWord } from '../interfaces/Word';
-import wordsJson from '../pages/games/wordgame/targetWords.json';
 
 const shuffleWords = (array: TargetWord[]) => {
 	let i = array.length;
@@ -83,6 +82,7 @@ const pickTarget = (newWordList: TargetWord[], roundWords: OptionWord[]) => {
 	return { notSeenWord, newWordList };
 };
 
+// Más descriptiva imposible, resetea el seen de todas las palabras de la lista para que puedan ser elegidas de nuevo
 const resetWords = (wordList: TargetWord[]) => {
 	wordList.map((word) => {
 		console.log(word.seen);

@@ -8,20 +8,15 @@ import Footer from '@/components/Footer';
 interface AuthProviderProps {
 	children: ReactNode;
 }
-// Define your initial state and reducer function
-type Session = {
-	isLoggedIn: boolean;
-	username: string;
-	firstName: string;
-	lastName: string;
-	role: number;
-};
 
-// Create a provider to provide your context object to all children
+// Crea un provider para envolver la aplicación y así poder acceder a la sesión del usuario en cualquier parte de la aplicación.
 function AuthProvider({ children }: AuthProviderProps) {
+	// Si existe una sesión, renderiza la aplicación.
 	if (useAuthStore.getState().session) {
 		return <>{children}</>;
 	}
+
+	// Si no existe una sesión, renderiza el loader mientras se pide la sesión al servidor.
 	const { user } = useUser();
 	if (useAuthStore.getState().loading)
 		return (
@@ -33,6 +28,8 @@ function AuthProvider({ children }: AuthProviderProps) {
 				<Footer />
 			</>
 		);
+
+	// Una vez se obtiene la sesión, renderiza la aplicación y guarda la sesión en el estado global.
 	if (user) {
 		useAuthStore.setState({ session: user });
 	}

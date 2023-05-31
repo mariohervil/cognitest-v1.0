@@ -16,17 +16,29 @@ export interface SaveModalProps {
 }
 
 function SaveModal(props: SaveModalProps) {
-	const URL = 'http://localhost:8080/games/wordgame/config/save';
+	// Es la URL del endpoint que guarda la configuración en la base de datos
+	const SAVE_CONFIG_URL = 'http://localhost:8080/games/wordgame/config/save';
+
+	// Es el nombre de la configuración que se va a guardar
 	const [name, setName] = useState<string>();
+
+	// Es la configuración del juego que se va a guardar, se obtiene de las props
 	const gameConfig = props.config;
+
+	// Es la lista de pacientes que se obtiene de las props, se usa para mostrarla en el modal, en el desplegable de pacientes
 	const { patients } = props;
+
+	// Es el paciente seleccionado en el desplegable de pacientes
 	const [selectedPatient, setSelectedPatient] = useState<string>();
 
+	// Función que se ejecuta cuando se guarda la configuración
 	const closeModal = () => {
 		const toggle = document.querySelector('.modal-toggle') as HTMLInputElement;
 		toggle.checked = false;
 	};
 
+	// Función para guardar la configuración, se ejecuta cuando se pulsa el botón de guardar y se comprueban los campos, si todo es correcto se hace la petición al servidor
+	// para guardar la configuración en la base de datos y se cierra el modal, se muestra un toast de éxito o de error dependiendo de si se ha guardado correctamente o no
 	const saveConfig = () => {
 		if (!name) {
 			toast.error('El nombre de la configuración está vacío');
@@ -41,13 +53,14 @@ function SaveModal(props: SaveModalProps) {
 		if (input) {
 			input.value = '';
 		}
+		// Busca el id del paciente seleccionado en la lista de pacientes y lo guarda en un campo de id de paciente para que la configuración se guarde para ese paciente
 		const patientId = patients.find(
 			(patient) => patient.fullName.toUpperCase() === selectedPatient.toUpperCase()
 		)?._id;
 
 		axios
 			.post(
-				URL,
+				SAVE_CONFIG_URL,
 				{ gameConfig: gameConfig, patientId: patientId },
 				{
 					withCredentials: true,

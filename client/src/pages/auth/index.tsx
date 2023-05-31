@@ -1,28 +1,35 @@
-import Head from 'next/head';
 import { useState, useEffect, FormEvent } from 'react';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useUser } from '@/hooks/useUser';
 import { toast } from 'react-hot-toast';
 import useAuthStore from '@/hooks/useAuthStore';
-import Loader from '@/components/Loader';
 
 const Auth = () => {
+	// Nombre de usuario y contraseña
 	const [username, handleUsername] = useState<string>('');
 	const [password, handlePassword] = useState<string>('');
+
+	// Router, fecha actual, función de inicio de sesión y sesión del estado global.
 	const router = useRouter();
 	const date = new Date();
+
+	// Recogemos la función de inicio de sesión y la sesión del estado global.
 	const login = useAuthStore((state) => state.login);
 	const session = useAuthStore((state) => state.session);
+
+	// Recogemos el usuario del estado global.
+	// Esto es necesario para que cuando el usuario inicie sesión, se actualice el estado global. Ya que el estado no tiene persistencia.
 	const { user } = useUser();
 
 	useEffect(() => {
+		// Si el usuario existe, inicia sesión y redirige a la página de juegos o al dashboard dependiendo del rol del usuario.
 		if (user) {
 			login({ ...user, isLoggedIn: true });
 			router.push(`${user.role == 0 ? '/games' : '/dashboard'}`);
 		}
 
+		// Si el usuario ya está logueado, redirige a la página de juegos o al dashboard dependiendo del rol del usuario.
 		if (session?.isLoggedIn && session?.role >= 1) {
 			router.push('/dashboard');
 		} else if (session?.isLoggedIn && session?.role == 0) {
@@ -32,6 +39,8 @@ const Auth = () => {
 
 	const validateForm = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
+		// Si el nombre de usuario y la contraseña no están vacíos, se envía la petición al servidor.
 		if (username.length >= 0 || password.length >= 0) {
 			axios
 				.post(
@@ -46,6 +55,7 @@ const Auth = () => {
 					}
 				)
 				.then((res: AxiosResponse) => {
+					// Inicia sesión y redirige a la página de juegos o al dashboard dependiendo del rol del usuario.
 					login({
 						isLoggedIn: true,
 						username: res.data.username,
@@ -63,6 +73,7 @@ const Auth = () => {
 					}
 				})
 				.catch((error) => {
+					// Si hay un error, muestra un mensaje de error.
 					toast.error('Error al iniciar sesión');
 				});
 		}

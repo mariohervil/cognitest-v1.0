@@ -1,6 +1,7 @@
 import { model, Schema, Document } from 'mongoose';
 import { randomUUID } from 'crypto';
 
+// Este modelo guarda las configuraciones de los juegos
 interface IGameConfig {
 	id?: String;
 	gameName: String;
