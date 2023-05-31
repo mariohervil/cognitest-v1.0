@@ -1,0 +1,28 @@
+{
+    "optionWords": [
+        {
+            "word": "gel",
+            "semantics": "objetos/cosas",
+            "font": "times new roman",
+            "firstLetter": "g"
+        },
+        {
+            "word": "rana",
+            "semantics": "animales",
+            "font": "Exo2",
+            "firstLetter": "r"
+        },
+        {
+            "word": "cereza",
+            "semantics": "alimentos",
+            "font": "space mono",
+            "firstLetter": "c"
+        },
+        {
+            "word": "equitación",
+            "semantics": "deportes",
+            "font": "DancingScript",
+            "firstLetter": "e"
+        }
+    ]
+}

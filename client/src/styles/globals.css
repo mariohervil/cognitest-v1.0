@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.center-screen {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bg-stripes-purple {
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 5px, #a855f780 0px, #a855f780 7.07px);
+    background-color: #a955f72d;
+}
+
+@font-face {
+    font-family: 'Space Mono';
+    src: url('./fonts/SpaceMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Stencil';
+    src: url('./fonts/Stencil_Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Lucida Handwriting';
+    src: url('./fonts/LHANDW.TTF') format('truetype');
+}
+
+@font-face {
+    font-family: 'DancingScript';
+    src: url('./fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Exo2';
+    src: url('./fonts/Exo2-VariableFont_wght.ttf') format('truetype');
+    font-weight: 1000;
+}
+
+.error-bg {
+    background-color: red;
+}
+
+.right-bg {
+    background-color: green;
+}
+
+.white-bg {
+    background-color: white;
+}

@@ -1,0 +1,16 @@
+.bg-stripes-purple {
+    background-image: linear-gradient(45deg, #9b59b6 25%, transparent 25%, transparent 50%, #9b59b6 50%, #9b59b6 75%, transparent 75%, transparent);
+    background-size: 20px 20px;
+}
+
+.error-bg {
+    background-color: red;
+}
+
+.right-bg {
+    background-color: green;
+}
+
+.white-bg {
+    background-color: white;
+}

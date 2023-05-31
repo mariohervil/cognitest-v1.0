@@ -1,0 +1,8 @@
+{
+	"configName": "Default",
+	"categories": 3,
+	"maxTries": 5,
+	"maxScorePerCategory": 8,
+	"maxTimePerGame": 30,
+	"maxSecondsPerQuestion": 20
+}
