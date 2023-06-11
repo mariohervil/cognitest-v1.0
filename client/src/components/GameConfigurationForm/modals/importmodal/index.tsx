@@ -44,7 +44,7 @@ function ImportModal(props: IResults) {
 						✕
 					</label>
 					<h3 className="font-bold text-4xl text-center mb-3">Configuraciones</h3>
-					<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 content-center w-max py-10">
+					<div className="flex gap-4 flex-wrap content-center py-10">
 						{configs?.map((config) => (
 							<ModalCard
 								key={config.id}
