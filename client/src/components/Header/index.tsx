@@ -6,21 +6,18 @@ import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 
 const Header = () => {
-	const logout = useAuthStore((state) => state.logout);
 	const session = useAuthStore((state) => state.session);
 	const router = useRouter();
 	const handleLogout = () => {
 		axios
 			.get('http://localhost:8080/auth/logout', { withCredentials: true })
 			.then((res) => {
-				router.push('/auth');
+				setTimeout(() => {
+					useAuthStore.getState().logout();
+					router.push('/auth');
+				}, 100);
 			})
-			.catch((err) => {
-				if (err.response.message === 'Already logged out') {
-				} else toast.error('Error al cerrar sesión');
-			});
-
-		logout();
+			.catch((err) => {});
 	};
 
 	return (
@@ -45,13 +42,12 @@ const Header = () => {
 					<SignedIn>
 						<li>
 							<>
-								<Link
-									href="/auth"
+								<p
 									className="text-white hover:text-gray-300 cursor-pointer"
-									onClick={() => handleLogout()}
+									onClick={handleLogout}
 								>
 									Cerrar sesión
-								</Link>
+								</p>
 							</>
 						</li>
 					</SignedIn>
