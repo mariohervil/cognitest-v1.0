@@ -9,6 +9,7 @@ import defaultJSON from '../gameConfigDefault.json';
 import requirePrivilege from '../middleware/requirePrivileges.middleware';
 import requireAuth from '../middleware/requireAuth.middleware';
 import { ObjectId } from 'mongoose';
+import { randomUUID } from 'crypto';
 const router = express.Router();
 
 // Login.
@@ -59,6 +60,7 @@ router.post('/signup/', [requirePrivilege(1), requireAuth()], (req: Request, res
 			birthYear: userData.birthYear,
 			studies: userData.studies,
 			sex: userData.sex,
+			gameConfigs: [{ ...defaultJSON, id: randomUUID() }],
 		})
 			.then((value: IPatient) => {
 				console.log(value);

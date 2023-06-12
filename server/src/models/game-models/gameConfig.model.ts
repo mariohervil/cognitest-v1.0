@@ -15,7 +15,7 @@ interface IGameConfig {
 
 const gameConfigSchema = new Schema(
 	{
-		id: { type: String, default: randomUUID, unique: true },
+		id: { type: String, default: randomUUID(), unique: true },
 		gameName: String,
 		configName: { type: String, required: true },
 		categories: Number,

@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { IUser } from '../../../../server/src/models/user.model';
 import { IPatient } from '../../../../server/src/models/patient.model';
 import { toast } from 'react-hot-toast';
+import useAuthStore from '@/hooks/useAuthStore';
 const emptyFormData = {
 	username: '',
 	password: '',
@@ -244,18 +245,19 @@ const SignUpForm = () => {
 						</div>
 					</div>
 				)}
-
-				<div className="form-control w-52">
-					<label className="cursor-pointer label">
-						<span className="label-text">Paciente?</span>
-						<input
-							type="checkbox"
-							className="toggle toggle-primary"
-							checked={isPatient}
-							onChange={handleCheckBoxChange}
-						/>
-					</label>
-				</div>
+				{!(useAuthStore.getState().session?.role! < 2) && (
+					<div className="form-control w-52">
+						<label className="cursor-pointer label">
+							<span className="label-text">Paciente?</span>
+							<input
+								type="checkbox"
+								className="toggle toggle-primary"
+								checked={isPatient}
+								onChange={handleCheckBoxChange}
+							/>
+						</label>
+					</div>
+				)}
 				<button
 					type="submit"
 					className="mt-4 bg-primary hover:bg-primary-focus text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-indigo focus:ring-2 ring-offset-2 ring-offset-gray-100 ring-primary"

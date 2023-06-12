@@ -30,7 +30,7 @@ const patientSchema = new Schema(
 		sex: String,
 		role: Number,
 		results: [wordGameSchema],
-		gameConfigs: [{ type: gameConfigSchema, required: false }],
+		gameConfigs: { type: [gameConfigSchema], default: [], required: false },
 		createdAt: { type: Date, default: Date.now },
 		updatedAt: { type: Date, default: Date.now },
 	},
